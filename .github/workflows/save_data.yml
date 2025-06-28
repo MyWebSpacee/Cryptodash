@@ -3,7 +3,7 @@ name: Daily Crypto Data Save
 on:
   schedule:
     - cron: '0 0 * * *'  # Every day at 12 AM UTC
-  workflow_dispatch: {}  # manual trigger option
+  workflow_dispatch: {}  # manual trigger option for testing
 
 jobs:
   save-data:
