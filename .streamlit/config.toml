@@ -1,0 +1,15 @@
+# cryptodashboard/.streamlit/config.toml
+
+
+# Ajuste l'espacement des conteneurs pour un look plus compact ou aéré
+[global]
+# Optionnel: contrôle l'espacement vertical (true = plus d'espace, false = moins)
+# disableVerticalSpace = false
+# cryptodashboard/.streamlit/config.toml (Thème Sombre)
+
+[theme]
+primaryColor="#6EB5FF" # Un bleu clair éclatant
+backgroundColor="#0E1117" # Noir profond
+secondaryBackgroundColor="#262830" # Gris très foncé pour les blocs
+textColor="#FAFAFA" # Blanc cassé pour le texte
+font="sans serif"

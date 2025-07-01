@@ -1,50 +1,73 @@
+# src/fetch_and_save.py
+
 import pandas as pd
+import logging
 import json
 import os
 from datetime import datetime
-from src.api.coingecko import get_top_cryptos
+from api.getdata import get_top_cryptos 
 
-def save_historical_data_to_json():
+
+def fetch_crypto_data(limit=100):
     """
-    Save historical stock data to a timestamped JSON file in the data/ folder.
+    Retrieves the current top cryptocurrency data from the CoinGecko API.
+    Args:
+    limit (int): The number of cryptocurrencies to retrieve.
+    Returns:
+    pd.DataFrame or None: A pandas DataFrame with the data, or None on failure.
     """
-    print("Recuperation des donnees historiques des cryptomonnaies...")
-    # Get historical data from Coingecko API
-    historical_data_df = get_top_cryptos(limit=100) # Adjust limit as needed
-    if historical_data_df is None:
-        print("Echec de la recuperation des donnees historiques des cryptomonnaies. Arret de la sauvegarde.")
-        return
-    # add a new column 'timestamp' with the current date and time in ISO
-    historical_data_df['timestamp'] = datetime.now().isoformat()
-    # prepare the save path if it does not exist
-    data_dir = 'data'
+    data_df = get_top_cryptos(limit=limit)
+    if data_df is None:
+        logging.error(f"[{datetime.now().isoformat()}] Failed to fetch crypto data.")
+        return None
+    data_df['collect_timestamp'] = datetime.now().isoformat() # Added a timestamp
+    return data_df
+
+def get_save_path(data_dir='data'):
+    """
+    Determines the full path to the JSON file for the daily backup.
+    Creates the 'data/' directory if necessary.
+    Args:
+    data_dir (str): The name of the directory to back up the data to.
+    Returns:
+    str: The full path to the file where the data should be backed up.
+    """
     if not os.path.exists(data_dir):
-        os.makedirs(data_dir)
-    # file name with timestamp
+        os.makedirs(data_dir) 
     file_name = datetime.now().strftime('crypto_data_%Y-%m-%d.json')
     file_path = os.path.join(data_dir, file_name)
-    #Load existing data if available
-    existing_data = []
-    if os.path.exists(file_path):
-        try:
-            with open(file_path, 'r' , encoding='utf-8') as file:
-                existing_data = json.load(file)
-                print(f"Chargement des donnees existantes depuis {file_path}")
-        except json.JSONDecodeError:
-            print(f"Erreur de decodage JSON dans le fichier {file_path}. Un nouveau fichier sera cree.")
-            existing_data = []
-    #convert DataFrame to a list of dictionaries and append the new data
-    new_data = historical_data_df.to_dict(orient='records')
-    existing_data.extend(new_data)
-    # Save the updated data to the JSON file
-    try: 
-        with open(file_path, 'w', encoding='utf-8') as file:
-            json.dump(existing_data, file, indent=4, ensure_ascii=False)
-        print(f"Les donnees historiques des cryptomonnaies ont ete sauvegardees dans {file_path}")
-    except IOError as e:
-        print(f"Erreur lors de la sauvegarde des donnees dans {file_path}: {e}")
+    return file_path
 
+def save_data_to_json(data_df: pd.DataFrame, file_path: str):
+    """
+    Saves a pandas DataFrame to a JSON file.
+    Args:
+    data_df (pd.DataFrame): The DataFrame to save.
+    file_path (str): The full path to the JSON file.
+    """
+    if data_df.empty:
+        return
+
+    data_to_save = data_df.to_dict(orient='records')
+    try:
+        with open(file_path, 'w', encoding='utf-8') as file:
+            json.dump(data_to_save, file, indent=4, ensure_ascii=False)
+        logging.info(f"[{datetime.now().isoformat()}] Data saved to : {file_path}")
+    except IOError as e:
+        logging.error(f"[{datetime.now().isoformat()}] Failed to save data to {file_path}: {e}")
+
+def main_save_daily_crypto_data():
+    """
+    Main function to orchestrate daily recovery and backup
+    """
+    crypto_data = fetch_crypto_data(limit=100) 
+    if crypto_data is None:
+        return
+
+    file_path = get_save_path()
+    save_data_to_json(crypto_data, file_path)
 
 
 if __name__ == "__main__":
-    save_historical_data_to_json()
+    logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+    main_save_daily_crypto_data()

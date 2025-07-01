@@ -1,15 +1,14 @@
 import requests
 import pandas as pd
+import logging
 
 def get_top_cryptos(vs_currency='usd', limit=10, page=1):
     """
     Retrieve the top cryptocurrencies by market cap from Coingecko API.
-
     Args:
         vs_currency (str): The currency to compare against (default is 'usd').
         limit (int): The number of cryptocurrencies to retrieve (default is 10).
         page (int): The page number for pagination (default is 1).
-
     Returns:
         pd.DataFrame : A pandas DataFrame containing cryptocurrency data.
         None: If the request fails or no data is returned.
@@ -21,23 +20,12 @@ def get_top_cryptos(vs_currency='usd', limit=10, page=1):
         data = response.json()
         if data :
             df = pd.DataFrame(data)
-            df = df[['id', 'symbol', 'name', 'current_price', 'market_cap','market_cap_change_percentage_24h' , 'total_volume', 'price_change_percentage_24h', 'image']]
-            df.columns = ['id', 'symbole', 'nom', 'prix_actuel', 'capitalisation_boursiere', 'pourcentage_capitalisation_24h', 'volume_24h', 'pourrcentage_de_prix_24h', 'image_url']
+            df = df[['id', 'symbol', 'name', 'current_price', 'market_cap','market_cap_change_percentage_24h' , 'total_volume', 'price_change_percentage_24h', 'image', 'low_24h', 'high_24h']]
             return df
         else :
-            print("Aucune donnee recue de l'API CoinGecko.")
+            logging.info("no data found.")
             return None
     except requests.exceptions.RequestException as e:
-        print(f"Erreur lors de la requete a l'API CoinGecko: {e}")
+        logging.error(f"Error fetching data from the API: {e}")
         return None
     
-
-if __name__ == "__main__":
-    # Example usage
-    top_cryptos_df = get_top_cryptos()
-    if top_cryptos_df is not None:
-        print(top_cryptos_df.head())  # Display the first few rows of the DataFrame
-        # Save to CSV if needed
-        top_cryptos_df.to_csv("top_cryptos.csv", index=False)
-    else:
-        print("Failed to retrieve data from CoinGecko API.")
