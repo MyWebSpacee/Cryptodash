@@ -18,7 +18,7 @@ This project highlights skills in Python development (API, data processing, visu
 * **Interactive Visualizations:**
     * Price evolution chart over multiple days for a selected cryptocurrency.
     * Integration of moving averages (7 and 30 days) to identify trends.
-    * Time filters (24h, 7 days, 1 month, 1 year, All) to analyze evolution over different periods.
+    * Time filters (7 days, 1 month, 1 year, All) to analyze evolution over different periods.
 * **User Interface:** Developed with **Streamlit**, the application offers easy navigation, responsive design, and clear presentation of information.
 * **Key Indicators:** Displays important metrics (24h high/low price, volume, market cap) for the selected cryptocurrency.
 * **Deployment:** The application is deployed on **Streamlit Cloud**, ensuring public accessibility and automatic updates.
