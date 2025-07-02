@@ -124,22 +124,22 @@ This application is designed to be easily deployed on Streamlit Cloud.
 ---
 
 ### Dashboard Overview
-![Overview of the CryptoDashboard showing key indicators, trend chart, and top 10.](assets/images/Cryptodash_overview.png)
+![Overview of the CryptoDashboard showing key indicators, trend chart, and top 10.](assets/images/Cryptodash_overview.PNG)
 
 ---
 
 ### Price Evolution Chart
-![Interactive chart showing the evolution of Bitcoin's price with moving averages and time filters.](assets/images/Price_Evolution.png)
+![Interactive chart showing the evolution of Bitcoin's price with moving averages and time filters.](assets/images/Price_Evolution.PNG)
 
 ---
 
 ### Top 10 Cryptocurrencies
-![Table displaying the top 10 cryptocurrencies with their price, change, and market capitalization.](assets/images/Top_10_Table.png)
+![Table displaying the top 10 cryptocurrencies with their price, change, and market capitalization.](assets/images/Top_10_Table.PNG)
 
 ---
 
 ### Navigation
-![List showing the choice of crypto to display.](assets/images/Navigation.png)
+![List showing the choice of crypto to display.](assets/images/Navigation.PNG)
 
 ---
 
