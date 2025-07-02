@@ -12,7 +12,7 @@ if project_root not in sys.path:
     print(f"DEBUG: Added {project_root} to sys.path")
 
 # Module imports
-from api.getdata import get_top_cryptos
+from src.api.getdata import get_top_cryptos
 from src.visualizations.plots import load_historical_data, plot_price_evolution_with_moving_averages
 
 # --- streamlit config ---

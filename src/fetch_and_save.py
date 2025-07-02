@@ -5,7 +5,7 @@ import logging
 import json
 import os
 from datetime import datetime
-from api.getdata import get_top_cryptos 
+from src.api.getdata import get_top_cryptos 
 
 
 def fetch_crypto_data(limit=100):
