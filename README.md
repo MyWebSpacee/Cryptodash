@@ -152,5 +152,5 @@ This application is designed to be easily deployed on Streamlit Cloud.
 
 ## 🧑‍💻 Developer
 
-**Anna** (or your GitHub username)
+**Emmanuelle EK**
 [My GitHub Profile](https://github.com/MyWebSpacee)
