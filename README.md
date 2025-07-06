@@ -147,3 +147,4 @@ This application is designed to be easily deployed on Streamlit Cloud.
 
 **Emmanuelle**  
 [GitHub](https://github.com/MyWebSpacee)
+[application](https://dailycrypto.streamlit.app/)
