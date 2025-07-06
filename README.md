@@ -143,8 +143,14 @@ This application is designed to be easily deployed on Streamlit Cloud.
 
 ---
 
+## 🚀 See the Project
+
+* **GitHub Repository:** [MyWebSpacee/Cryptodash](https://github.com/MyWebSpacee/Cryptodash)
+* **Deployed Application:** [CryptoDashboard on Streamlit Cloud](https://dailycrypto.streamlit.app/)
+
+---
+
 ## 🧑‍💻 Developer
 
-**Emmanuelle**  
-[GitHub](https://github.com/MyWebSpacee)
-[application](https://dailycrypto.streamlit.app/)
+**Anna** (or your GitHub username)
+[My GitHub Profile](https://github.com/MyWebSpacee)
